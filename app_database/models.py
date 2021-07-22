@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 
-
+from sqlalchemy.dialects.postgresql import ARRAY
 from .database import Base
 
 """
@@ -40,7 +40,7 @@ class Student(Base):
 class Record(Base):
     __tablename__ = "records"
 
-    school_year = Column(String, index=True)
+    school_year = Column(Integer, index=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
@@ -50,8 +50,10 @@ class Record(Base):
     #el estudiante malo
     student_id = Column(Integer, ForeignKey("students.id"))
     student = relationship("Student", back_populates="records")
+    
     #comentarios
     comment = relationship("Comment", back_populates="record")
+    
     #notas
     subjects = relationship("Subjects", back_populates="record")
 
@@ -82,7 +84,12 @@ class Subjects(Base):
     lapso_2 = Column(Integer)
     lapso_3 = Column(Integer)
 
-    result = Column(Integer)
 
 
     
+class HistorialTable(Base):
+    __tablename__ = "historial_tables"
+    id = Column(Integer, primary_key=True, index=True)
+
+    school_year = Column(Integer, index=True)
+    titles = Column(ARRAY(String(100)))

@@ -1,0 +1,33 @@
+
+
+version: '3.9'
+
+services: 
+    
+
+    db:
+        image: postgres
+        env_file: .env 
+
+
+    web:
+        build: 
+            context: .
+
+        env_file: .env
+
+        volumes: 
+            - .:/code
+
+        environment: 
+            - DJANGO_SUPERUSER_EMAIL=admin@mail.com
+            - DJANGO_SUPERUSER_USERNAME=admin
+            - DJANGO_SUPERUSER_PASSWORD=admin
+
+        command: uvicorn main:app --host 0.0.0.0
+        
+        depends_on: 
+            - db
+            
+        ports:
+            - 8008:8000

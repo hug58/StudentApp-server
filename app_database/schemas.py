@@ -45,7 +45,6 @@ class SubjectBase(BaseModel):
 	lapso_2: int
 	lapso_3: int
 
-	result: int
 
 class SubjectCreate(SubjectBase):   
 	pass
@@ -79,13 +78,46 @@ HISTORIAL
 """
 
 class RecordBase(BaseModel):
-	school_year:str
+	school_year:int
+	student_id:int
 
 class RecordCreate(RecordBase):
-	pass 
+	subjects: List[SubjectCreate] 
 
 class Record(RecordBase):
 	id: int
-	student_id: int
 	subjects: List[Subject] = []
 	comments: List[Comment] = []
+
+
+"""
+Notas
+"""
+
+class SubjectBaseTable(BaseModel):
+	title:str
+
+class SubjectCreateTable(SubjectBase):   
+	pass
+
+class Subject(SubjectBase):
+	id: int
+	record_id: int
+
+	class Config:
+		orm_mode = True
+
+
+"""
+HISTORIAL TABLE
+"""
+class RecordBaseTable(BaseModel):
+	school_year:int
+
+class RecordCreateTable(RecordBaseTable):
+	titles: List[str] 
+
+class RecordTable(RecordBaseTable):
+	id: int
+	titles: List[str] 
+	
