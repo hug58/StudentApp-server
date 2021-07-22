@@ -11,6 +11,7 @@ DATABASE URL
 from starlette.config import Config
 from starlette.datastructures import Secret
 
+"""
 config = Config(".env")
 
 
@@ -24,8 +25,9 @@ if int(config('DEBUG')) == 1:
     SQLALCHEMY_DATABASE_URL = config("DATABASE_URL", default= f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_SERVER}:{POSTGRES_PORT}/{POSTGRES_DB}")
 else:
     pass
+"""
 
-SQLALCHEMY_DATABASE_URL = os.environ['DATABASE_URL']
+SQLALCHEMY_DATABASE_URL = os.getenv('DATABASE_URL')
 
 
 
