@@ -20,14 +20,12 @@ POSTGRES_SERVER = config("POSTGRES_SERVER", cast=str, default="db")
 POSTGRES_PORT = config("POSTGRES_PORT", cast=str, default="5432")
 POSTGRES_DB = config("POSTGRES_DB", cast=str)
 
+if int(config('DEBUG')) == 1:
+    SQLALCHEMY_DATABASE_URL = config("DATABASE_URL", default= f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_SERVER}:{POSTGRES_PORT}/{POSTGRES_DB}")
+else:
+    SQLALCHEMY_DATABASE_URL = os.environ['DATABASE_URL']
 
-SQLALCHEMY_DATABASE_URL = os.environ.get("DATABASE_URL",f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_SERVER}:{POSTGRES_PORT}/{POSTGRES_DB}")
-#SQLALCHEMY_DATABASE_URL = config("DATABASE_URL", default=)
 
-
-#SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
-#SQLALCHEMY_DATABASE_URL = 'mysql+mysqlconnector://$hug58:$gross@213@$localhost/$students'
-# SQLALCHEMY_DATABASE_URL = "postgresql://user:password@postgresserver/db"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL 
