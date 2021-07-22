@@ -27,7 +27,7 @@ else:
     pass
 """
 
-SQLALCHEMY_DATABASE_URL = os.getenv('DATABASE_URL')
+SQLALCHEMY_DATABASE_URL = os.getenv('DATABASE_URL',"postgres://uzwuwzbmynwxmn:8211f8291dfca7cef7522a35e645df5b4e8f1a91263efa01c9c06b9473f5437c@ec2-52-1-20-236.compute-1.amazonaws.com:5432/dfsvdh03geanmd")
 
 
 
