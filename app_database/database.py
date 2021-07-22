@@ -23,7 +23,9 @@ POSTGRES_DB = config("POSTGRES_DB", cast=str)
 if int(config('DEBUG')) == 1:
     SQLALCHEMY_DATABASE_URL = config("DATABASE_URL", default= f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_SERVER}:{POSTGRES_PORT}/{POSTGRES_DB}")
 else:
-    SQLALCHEMY_DATABASE_URL = os.environ['DATABASE_URL']
+    pass
+
+SQLALCHEMY_DATABASE_URL = os.environ['DATABASE_URL']
 
 
 
