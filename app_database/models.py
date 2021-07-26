@@ -41,6 +41,8 @@ class Record(Base):
     __tablename__ = "records"
 
     school_year = Column(Integer, index=True)
+    section = Column(String(10))
+
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
@@ -56,6 +58,7 @@ class Record(Base):
     
     #notas
     subjects = relationship("Subjects", back_populates="record")
+
 
 
 class Comment(Base):
@@ -79,10 +82,7 @@ class Subjects(Base):
     record = relationship("Record", back_populates="subjects")
 
     title = Column(String, index=True)
-
-    lapso_1 = Column(Integer)
-    lapso_2 = Column(Integer)
-    lapso_3 = Column(Integer)
+    notes = Column(ARRAY(Integer()))
 
 
 

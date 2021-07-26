@@ -40,10 +40,7 @@ Notas
 
 class SubjectBase(BaseModel):
 	title:str
-
-	lapso_1: int
-	lapso_2: int
-	lapso_3: int
+	notes: List[int]
 
 
 class SubjectCreate(SubjectBase):   
@@ -73,21 +70,25 @@ class Comment(CommentBase):
 	class Config:
 		orm_mode = True
 
+
+
 """
 HISTORIAL
 """
 
+
 class RecordBase(BaseModel):
 	school_year:int
 	student_id:int
+	section:str
 
 class RecordCreate(RecordBase):
 	subjects: List[SubjectCreate] 
 
 class Record(RecordBase):
 	id: int
-	subjects: List[Subject] = []
-	comments: List[Comment] = []
+	subjects: List[Subject]
+	comments: List[Comment] 
 
 
 """
@@ -120,4 +121,4 @@ class RecordCreateTable(RecordBaseTable):
 class RecordTable(RecordBaseTable):
 	id: int
 	titles: List[str] 
-	
+	created_at: str

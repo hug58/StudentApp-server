@@ -25,7 +25,12 @@ if config("DEBUG") == "1":
     SQLALCHEMY_DATABASE_URL = config("DATABASE_URL", default= f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_SERVER}:{POSTGRES_PORT}/{POSTGRES_DB}")
 
 else:
-    SQLALCHEMY_DATABASE_URL = config("DATABASE_URL")
+    
+    url = config("DATABASE_URL")
+    if url.startswith("postgres://"):
+        url = url.replace("postgres://", "postgresql://", 1)
+
+    SQLALCHEMY_DATABASE_URL = url
 
         
 
