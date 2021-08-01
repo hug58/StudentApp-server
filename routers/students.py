@@ -14,8 +14,6 @@ from app_database import models
 
 router = APIRouter()
 
-
-
 @router.get('/all',response_model= Dict)
 async def students(db: Session = Depends(get_db)):
     _students = db.query(models.Student).all()

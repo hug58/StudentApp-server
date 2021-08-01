@@ -40,7 +40,7 @@ Notas
 
 class SubjectBase(BaseModel):
 	title:str
-	notes: List[int,int,int]
+	notes: List
 
 
 class SubjectCreate(SubjectBase):   
