@@ -2,13 +2,14 @@
 from typing import List, Optional
 from pydantic import BaseModel
 
+
+
 """
 Estudiantes
 """
 
 class StudentBase(BaseModel):
 	
-
 	first_name: str
 	last_name: str
 	ci:str

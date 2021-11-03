@@ -15,7 +15,6 @@ from starlette.datastructures import Secret
 config = Config(".env")
 
 if config("DEBUG") == "1": 
-
     POSTGRES_USER = config("POSTGRES_USER", cast=str)
     POSTGRES_PASSWORD = config("POSTGRES_PASSWORD", cast=Secret)
     POSTGRES_SERVER = config("POSTGRES_SERVER", cast=str, default="db")
@@ -25,7 +24,6 @@ if config("DEBUG") == "1":
     SQLALCHEMY_DATABASE_URL = config("DATABASE_URL", default= f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_SERVER}:{POSTGRES_PORT}/{POSTGRES_DB}")
 
 else:
-    
     url = config("DATABASE_URL")
     if url.startswith("postgres://"):
         url = url.replace("postgres://", "postgresql://", 1)
@@ -34,14 +32,9 @@ else:
 
         
 
-engine = create_engine(
-    SQLALCHEMY_DATABASE_URL 
-)
-
+engine = create_engine(SQLALCHEMY_DATABASE_URL)
 #, connect_args={"check_same_thread": False}
-
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
 Base = declarative_base()
 
 
